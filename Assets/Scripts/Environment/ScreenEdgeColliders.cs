@@ -23,7 +23,6 @@ public class ScreenEdgeColliders : MonoBehaviour
         edge.transform.position = center;
 
         BoxCollider2D col = edge.AddComponent<BoxCollider2D>();
-        col.isTrigger = true;
         col.size = size;
 
         edge.tag = tag;
