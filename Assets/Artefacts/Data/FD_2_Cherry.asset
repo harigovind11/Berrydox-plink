@@ -16,3 +16,4 @@ MonoBehaviour:
   points: 3
   fruitSprite: {fileID: 1499125249, guid: 403dc65265988b1489631cc6cda130ac, type: 3}
   nextFruitData: {fileID: 11400000, guid: 7fd14d0a82f4b204facd4551da311474, type: 2}
+  size: 0.4

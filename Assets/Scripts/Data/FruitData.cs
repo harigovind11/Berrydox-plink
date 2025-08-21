@@ -7,4 +7,5 @@ public class FruitData : ScriptableObject
     public int points;
     public Sprite fruitSprite;
     public FruitData nextFruitData;
+    public float size = 1.0f;
 }
