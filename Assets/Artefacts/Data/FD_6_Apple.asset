@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1298908f7ec639b4dbd37812977308fc, type: 3}
   m_Name: FD_6_Apple
   m_EditorClassIdentifier: 
-  fruitIndex: 0
-  points: 1
+  fruitIndex: 6
+  points: 7
   fruitSprite: {fileID: 263840068, guid: 403dc65265988b1489631cc6cda130ac, type: 3}
-  nextFruitData: {fileID: 0}
+  nextFruitData: {fileID: 11400000, guid: 2b657d6255265f845961add1388f15f0, type: 2}

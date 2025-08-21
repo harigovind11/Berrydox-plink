@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1298908f7ec639b4dbd37812977308fc, type: 3}
   m_Name: FD_4_Peach
   m_EditorClassIdentifier: 
-  fruitIndex: 0
-  points: 1
-  fruitSprite: {fileID: -232969245, guid: f0388a7c27505ce4484dd90812557062, type: 3}
-  nextFruitData: {fileID: 0}
+  fruitIndex: 4
+  points: 5
+  fruitSprite: {fileID: 1438213307, guid: f0388a7c27505ce4484dd90812557062, type: 3}
+  nextFruitData: {fileID: 11400000, guid: cbb9eb11d28b90d4c97298e9a463bb6b, type: 2}
