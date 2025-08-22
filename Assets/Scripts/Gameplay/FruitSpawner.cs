@@ -3,30 +3,40 @@ using System.Collections.Generic;
 
 public class FruitSpawner : MonoBehaviour
 {
-    [SerializeField] private List<FruitData> spawnableFruits; // Only basic fruits, e.g., first 3-4
+    [SerializeField] private List<FruitData> spawnableFruits;
     [SerializeField] private Transform dropPoint;
     [SerializeField] private float dropBoundsX = 2.5f;
 
-    private FruitData nextFruitToSpawn;
+    // --- LOGIC CHANGE ---
+    // We now track the current and next fruit data separately.
+    private FruitData currentFruitData;
+    private FruitData nextFruitData;
     private Fruit heldFruit;
 
     void Start()
     {
-        // Listen for game over so we can stop spawning
         GameEvents.OnGameOver += HandleGameOver;
-        PrepareNextFruit();
-        SpawnFruit();
+        
+        // Prepare the first two fruits at the start of the game.
+        currentFruitData = GetRandomFruitData();
+        nextFruitData = GetRandomFruitData();
+
+        // Update the UI to show the *correct* next fruit.
+        GameEvents.TriggerNextFruitChanged(nextFruitData.fruitSprite);
+        
+        // Spawn the first fruit for the player to hold.
+        SpawnHeldFruit();
     }
 
-    private void OnDestroy() {
+    private void OnDestroy() 
+    {
         GameEvents.OnGameOver -= HandleGameOver;
     }
 
     void Update()
     {
         if (heldFruit == null) return;
-        
-        // Move held fruit via mouse
+
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         float clampedX = Mathf.Clamp(mousePos.x, -dropBoundsX, dropBoundsX);
         heldFruit.transform.position = new Vector3(clampedX, dropPoint.position.y, 0);
@@ -37,17 +47,16 @@ public class FruitSpawner : MonoBehaviour
             DropFruit();
         }
     }
-
-    private void PrepareNextFruit()
-    {
-        nextFruitToSpawn = spawnableFruits[Random.Range(0, spawnableFruits.Count)];
-        GameEvents.TriggerNextFruitChanged(nextFruitToSpawn.fruitSprite);
-    }
     
-    private void SpawnFruit()
+    private FruitData GetRandomFruitData()
+    {
+        return spawnableFruits[Random.Range(0, spawnableFruits.Count)];
+    }
+
+    private void SpawnHeldFruit()
     {
         heldFruit = FruitPool.Instance.Get();
-        heldFruit.SetFruitData(nextFruitToSpawn);
+        heldFruit.SetFruitData(currentFruitData);
         // Disable physics while holding
         heldFruit.GetComponent<Rigidbody2D>().isKinematic = true;
         heldFruit.GetComponent<Collider2D>().enabled = false;
@@ -55,25 +64,37 @@ public class FruitSpawner : MonoBehaviour
 
     private void DropFruit()
     {
+        if (heldFruit == null) return;
+        
         // Enable physics
         heldFruit.GetComponent<Rigidbody2D>().isKinematic = false;
         heldFruit.GetComponent<Collider2D>().enabled = true;
         heldFruit = null;
         
-        Invoke(nameof(GetReadyForNextDrop), 0.5f);
+        // After a short delay, prepare for the next drop.
+        Invoke(nameof(PrepareNextDrop), 0.5f);
     }
 
-    void GetReadyForNextDrop()
+
+    void PrepareNextDrop()
     {
-        PrepareNextFruit();
-        SpawnFruit();
+    
+        currentFruitData = nextFruitData;
+
+        nextFruitData = GetRandomFruitData();
+
+        GameEvents.TriggerNextFruitChanged(nextFruitData.fruitSprite);
+
+        SpawnHeldFruit();
     }
     
     private void HandleGameOver()
     {
-        if (heldFruit != null) {
-            Destroy(heldFruit.gameObject); // Or return to pool
+        if (heldFruit != null) 
+        {
+            FruitPool.Instance.ReturnToPool(heldFruit);
+            heldFruit = null;
         }
-        this.enabled = false; // Stop this script
+        this.enabled = false; 
     }
 }

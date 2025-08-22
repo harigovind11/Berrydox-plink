@@ -30,7 +30,8 @@ public class UIManager : MonoBehaviour
 
     private void UpdateScoreText(int score)
     {
-        scoreText.text = $"Score: {score}";
+        scoreText.text = $"{score}";
+            
     }
 
     private void UpdateNextFruitImage(Sprite sprite)

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8172628812899405090}
   - component: {fileID: 1020739170391444232}
   - component: {fileID: 5234924882267338854}
-  - component: {fileID: -5363183652993031787}
+  - component: {fileID: -8326807639380808083}
   m_Layer: 0
   m_Name: Fruit_template
   m_TagString: Fruit
@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a61bf50410ecc349bcade604e49928e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!60 &-5363183652993031787
+--- !u!60 &-8326807639380808083
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

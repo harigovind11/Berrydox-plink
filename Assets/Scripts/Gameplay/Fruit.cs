@@ -6,6 +6,8 @@ public class Fruit : MonoBehaviour
 
     private SpriteRenderer _spriteRenderer;
     private Collider2D _Collider;
+    
+
 
     public bool hasMerged { get; set; }
 

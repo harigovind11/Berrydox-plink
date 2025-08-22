@@ -8,11 +8,11 @@ public class ScreenEdgeColliders : MonoBehaviour
     {
         float screenHeight = 2f * Camera.main.orthographicSize;
         float screenWidth = screenHeight * Camera.main.aspect;
-
-        CreateEdge("Left", "Side", new Vector2(-screenWidth / 2 - thickness / 2, 0), new Vector2(thickness, screenHeight));
-        CreateEdge("Right", "Side", new Vector2(screenWidth / 2 + thickness / 2, 0), new Vector2(thickness, screenHeight));
-        // CreateEdge("Top", "Top", new Vector2(0, screenHeight / 2 + thickness / 2), new Vector2(screenWidth, thickness));
-        CreateEdge("Bottom", "Bottom", new Vector2(0, -screenHeight / 2 - thickness / 2), new Vector2(screenWidth, thickness));
+        
+        CreateEdge("Left", "Side", new Vector2(-screenWidth / 2, 0), new Vector2(thickness, screenHeight));
+        CreateEdge("Right", "Side", new Vector2(screenWidth / 2, 0), new Vector2(thickness, screenHeight));
+        CreateEdge("Bottom", "Bottom", new Vector2(0, -screenHeight / 2), new Vector2(screenWidth, thickness));
+        // CreateEdge("Top", "Top", new Vector2(0, screenHeight / 2), new Vector2(screenWidth, thickness));
     }
 
     void CreateEdge(string name, string tag, Vector2 center, Vector2 size)
