@@ -7,8 +7,6 @@ public class FruitSpawner : MonoBehaviour
     [SerializeField] private Transform dropPoint;
     [SerializeField] private float dropBoundsX = 2.5f;
 
-    // --- LOGIC CHANGE ---
-    // We now track the current and next fruit data separately.
     private FruitData currentFruitData;
     private FruitData nextFruitData;
     private Fruit heldFruit;
@@ -65,6 +63,8 @@ public class FruitSpawner : MonoBehaviour
     private void DropFruit()
     {
         if (heldFruit == null) return;
+        
+        GameEvents.TriggerFruitDropped();
         
         // Enable physics
         heldFruit.GetComponent<Rigidbody2D>().isKinematic = false;

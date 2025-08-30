@@ -34,7 +34,7 @@ public class MergeService : MonoBehaviour
             newFruit.SetFruitData(nextFruitData);
             
             // Trigger the merge event for other systems
-            GameEvents.TriggerFruitMerged(nextFruitData);
+            GameEvents.TriggerFruitMerged(nextFruitData,mergePosition);
         }
     }
 }

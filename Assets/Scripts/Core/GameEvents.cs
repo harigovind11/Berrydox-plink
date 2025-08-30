@@ -3,10 +3,23 @@ using UnityEngine;
 
 public static class GameEvents
 {
-    // Event raised when two fruits merge
-    // The FruitData is the new fruit that was created
-    public static event Action<FruitData> OnFruitMerged;
-    public static void TriggerFruitMerged(FruitData newFruit) => OnFruitMerged?.Invoke(newFruit);
+    // To play a sound when the player drops a fruit.
+    public static event Action OnFruitDropped;
+    public static void TriggerFruitDropped()=> OnFruitDropped?.Invoke();
+    
+    /// <summary>
+    /// Event raised when two fruits merge
+    /// The FruitData is the new fruit that was created
+    /// </summary>
+    public static event Action<FruitData,Vector3> OnFruitMerged;
+    public static void TriggerFruitMerged(FruitData newFruit,Vector3 position) => OnFruitMerged?.Invoke(newFruit,position);
+    
+    // Combo events
+    public static event Action<int> OnComboUpdated;
+    public static void TriggerComboUpdated(int comboCount) => OnComboUpdated?.Invoke(comboCount);
+
+    public static event Action OnComboBroken;
+    public static void TriggerComboBroken() => OnComboBroken?.Invoke();
 
     // Event raised when the game is over
     public static event Action OnGameOver;
