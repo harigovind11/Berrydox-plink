@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance {get; private set;}
@@ -47,11 +48,11 @@ public class AudioManager : MonoBehaviour
         GameEvents.OnGameOver -= HandleGameOver;
     }
 
+
     private void HandleFruitDrop()
     {
         PlaySound(SoundType.FruitDrop);
     }
-
     private void HandleFruitMerge(FruitData fruitData, Vector3 position)
     {
         PlaySound(SoundType.FruitMerge);

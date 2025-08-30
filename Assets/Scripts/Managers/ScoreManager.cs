@@ -4,22 +4,23 @@ public class ScoreManager : MonoBehaviour
 {
     private int currentScore = 0;
 
-    void Start()
+    void OnEnable()
     {
-        // Subscribe to the event
         GameEvents.OnFruitMerged += HandleFruitMerged;
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
-        // Always unsubscribe when the object is destroyed
         GameEvents.OnFruitMerged -= HandleFruitMerged;
     }
 
-    private void HandleFruitMerged(FruitData mergedFruitData)
+    private void HandleFruitMerged(FruitData mergedFruitData,Vector3 mergedFruitPosition)
     {
-        currentScore += mergedFruitData.points;
+        int multiplier = ComboManager.Instance.GetComboMultiplier();
+        currentScore += mergedFruitData.points * multiplier;
         // Raise an event to let the UI know the score has changed
         GameEvents.TriggerScoreUpdated(currentScore);
     }
+    
+    
 }

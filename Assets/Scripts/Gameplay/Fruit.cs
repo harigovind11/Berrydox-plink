@@ -40,6 +40,7 @@ public class Fruit : MonoBehaviour
             {
                 MergeService.Instance.ProcessMerge(this, otherFruit);
             }
+    
         }
     }
 }

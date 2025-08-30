@@ -22,7 +22,6 @@ public class MergeService : MonoBehaviour
         fruitB.hasMerged = true;
 
         Vector3 mergePosition = (fruitA.transform.position + fruitB.transform.position) / 2;
-
         FruitPool.Instance.ReturnToPool(fruitA);
         FruitPool.Instance.ReturnToPool(fruitB);
 

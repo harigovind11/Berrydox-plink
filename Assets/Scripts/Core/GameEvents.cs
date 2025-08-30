@@ -7,6 +7,7 @@ public static class GameEvents
     public static event Action OnFruitDropped;
     public static void TriggerFruitDropped()=> OnFruitDropped?.Invoke();
     
+    
     /// <summary>
     /// Event raised when two fruits merge
     /// The FruitData is the new fruit that was created
