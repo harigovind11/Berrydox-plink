@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9a88c3a0f9f5aaa4c8c900d4a28f52e7
+guid: f88d17bc4a954e249a14e84fb94f5490
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,97 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: border
+      name: stone wall panels_0
       rect:
         serializedVersion: 2
-        x: 115
-        y: 1165
-        width: 799
-        height: 103
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 59fc1def7b9d8244d9b3a4ee8c542808
-      internalID: 719976991
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: wooden panel
-      rect:
-        serializedVersion: 2
-        x: 956
-        y: 1167
-        width: 946
-        height: 698
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 85fd8380ed5c01f45a5c91bd0dbf56a7
-      internalID: 874966815
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bar
-      rect:
-        serializedVersion: 2
-        x: 756
-        y: 890
-        width: 545
-        height: 200
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 98cc6472805f4fb40ac69639cfdef82e
-      internalID: -1444152231
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: title
-      rect:
-        serializedVersion: 2
-        x: 98
-        y: 894
-        width: 618
-        height: 196
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 789dd274bd622b54cb73325e8f7e6136
-      internalID: -1562325516
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sheet_0
-      rect:
-        serializedVersion: 2
-        x: 935
-        y: 132
-        width: 157
-        height: 162
+        x: 42
+        y: 17
+        width: 463
+        height: 505
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -208,29 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 73e71fe880521a94997bfa169d1a9911
-      internalID: 1851946175
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sheet_1
-      rect:
-        serializedVersion: 2
-        x: 1108
-        y: 138
-        width: 157
-        height: 167
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cb1411bcc0834b0458260f7b89b2b11a
-      internalID: -1009383335
+      spriteID: 6b0aad806ba43ac4da9ebe832c679813
+      internalID: 1859529923
       vertices: []
       indices: 
       edges: []
@@ -246,15 +141,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      bar: -1444152231
-      border: 719976991
-      round_blank: -1141977866
-      round_filled: 675860975
-      sheet_0: 1851946175
-      sheet_1: -1009383335
-      title: -1562325516
-      title tag: 1508114815
-      wooden panel: 874966815
+      stone wall panels_0: 1859529923
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

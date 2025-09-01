@@ -4,84 +4,87 @@ using System.Collections;
 
 public class ComboDisplay : MonoBehaviour
 {
+    [Header("UI Elements")]
     [SerializeField] private TextMeshProUGUI comboText;
-    [SerializeField] private float pulseScale = 1.5f;   // How big it gets on update
-    [SerializeField] private float animationSpeed = 10f; // How fast it animates
+    [SerializeField] private CanvasGroup comboCanvasGroup;
 
-    private Coroutine currentAnimation;
+    [Header("Animation Settings")]
+    [SerializeField] private float effectDuration = 1.2f;
+    [SerializeField] private float moveUpDistance = 50f;
+    [SerializeField] private float scaleFactor = 1.5f;
+
+    private Vector3 startPosition;
+    private Coroutine comboAnimationCoroutine;
 
     private void Awake()
     {
-        // Ensure the component is linked, if not, try to find it on this GameObject.
-        if (comboText == null)
+        if (comboText != null)
         {
-            comboText = GetComponent<TextMeshProUGUI>();
+            startPosition = comboText.transform.localPosition;
         }
-        // Start with the text hidden
-        comboText.alpha = 0;
     }
 
     private void OnEnable()
     {
-        GameEvents.OnComboUpdated += HandleComboUpdated;
-        GameEvents.OnComboBroken += HandleComboBroken;
+        GameEvents.OnComboUpdated += ShowComboEffect;
+
     }
 
     private void OnDisable()
     {
-        GameEvents.OnComboUpdated -= HandleComboUpdated;
-        GameEvents.OnComboBroken -= HandleComboBroken;
+        GameEvents.OnComboUpdated -= ShowComboEffect;
     }
 
-    private void HandleComboUpdated(int comboCount)
+    private void ShowComboEffect(int comboCount)
     {
-        // We typically don't show a "1x" combo. You can change this if you want.
-        if (comboCount < 2) return;
+        // Only show the effect for combos of 2x or higher
+        if (comboCount > 1)
+        {
+            // If an animation is already playing, stop it first.
+            if (comboAnimationCoroutine != null)
+            {
+                StopCoroutine(comboAnimationCoroutine);
+            }
+            comboAnimationCoroutine = StartCoroutine(ComboAnimationCoroutine(comboCount));
+        }
+        else
+        {
+            // If the combo is 1 or breaks, instantly hide it.
+            if (comboCanvasGroup != null)
+            {
+                comboCanvasGroup.alpha = 0;
+            }
+        }
+    }
 
-        // Update the text
+    private IEnumerator ComboAnimationCoroutine(int comboCount)
+    {
+        // 1. Reset the state before starting the animation
+        comboText.transform.localPosition = startPosition;
+        comboText.transform.localScale = Vector3.one;
+        comboCanvasGroup.alpha = 1f; // Make it instantly visible
         comboText.text = $"{comboCount}x";
 
-        // Start the pulse animation
-        if (currentAnimation != null)
-        {
-            StopCoroutine(currentAnimation);
-        }
-        currentAnimation = StartCoroutine(AnimatePulse());
-    }
+        // 2. Define the start and end points for the animation
+        Vector3 targetPosition = startPosition + new Vector3(0, moveUpDistance, 0);
+        Vector3 targetScale = Vector3.one * scaleFactor;
 
-    private void HandleComboBroken()
-    {
-        // Start the fade-out animation
-        if (currentAnimation != null)
+        // 3. Animate over the specified duration
+        float elapsedTime = 0f;
+        while (elapsedTime < effectDuration)
         {
-            StopCoroutine(currentAnimation);
-        }
-        currentAnimation = StartCoroutine(AnimateFadeOut());
-    }
+            elapsedTime += Time.deltaTime;
+            float progress = elapsedTime / effectDuration; // A value from 0 to 1
 
-    private IEnumerator AnimatePulse()
-    {
-        // Make the text visible and pop it to a larger scale
-        comboText.alpha = 1;
-        transform.localScale = Vector3.one * pulseScale;
+            // Lerp (linearly interpolate) the properties based on progress
+            comboText.transform.localPosition = Vector3.Lerp(startPosition, targetPosition, progress);
+            comboText.transform.localScale = Vector3.Lerp(Vector3.one, targetScale, progress);
+            comboCanvasGroup.alpha = Mathf.Lerp(1f, 0f, progress); // Fade from 1 to 0
 
-        // Animate it smoothly back to its normal size
-        while (transform.localScale.x > 1.05f)
-        {
-            transform.localScale = Vector3.Lerp(transform.localScale, Vector3.one, Time.deltaTime * animationSpeed);
-            yield return null;
+            yield return null; // Wait for the next frame
         }
-        transform.localScale = Vector3.one; // Snap to final scale
-    }
 
-    private IEnumerator AnimateFadeOut()
-    {
-        // Animate the alpha smoothly to zero
-        while (comboText.alpha > 0.05f)
-        {
-            comboText.alpha = Mathf.Lerp(comboText.alpha, 0, Time.deltaTime * animationSpeed);
-            yield return null;
-        }
-        comboText.alpha = 0; // Snap to final alpha
+        // 4. Ensure it's fully hidden at the end
+        comboCanvasGroup.alpha = 0f;
     }
 }
